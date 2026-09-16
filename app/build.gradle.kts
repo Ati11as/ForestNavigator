@@ -2,7 +2,7 @@ plugins { id("com.android.application"); id("org.jetbrains.kotlin.android") }
 
 android {
     namespace = "com.ati11as.forestnavigator"
-    compileSdk = 35
+    compileSdk = 36
     defaultConfig { applicationId = "com.ati11as.forestnavigator"; minSdk = 26; targetSdk = 35; versionCode = 1; versionName = "1.0.0" }
     signingConfigs {
         create("release") {
