@@ -1,0 +1,1 @@
+# GitHub Actions builds a debug APK on every push and a release APK on tags.
