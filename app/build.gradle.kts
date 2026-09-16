@@ -1,8 +1,21 @@
 plugins { id("com.android.application"); id("org.jetbrains.kotlin.android") }
 
-android { namespace = "com.ati11as.forestnavigator"; compileSdk = 35
+android {
+    namespace = "com.ati11as.forestnavigator"
+    compileSdk = 35
     defaultConfig { applicationId = "com.ati11as.forestnavigator"; minSdk = 26; targetSdk = 35; versionCode = 1; versionName = "1.0.0" }
-    buildTypes { release { isMinifyEnabled = false; proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro") } }
+    signingConfigs {
+        create("release") {
+            val ks = System.getenv("ANDROID_KEYSTORE_PATH")
+            if (!ks.isNullOrBlank()) {
+                storeFile = file(ks)
+                storePassword = System.getenv("ANDROID_STORE_PASSWORD")
+                keyAlias = System.getenv("ANDROID_KEY_ALIAS")
+                keyPassword = System.getenv("ANDROID_KEY_PASSWORD")
+            }
+        }
+    }
+    buildTypes { release { isMinifyEnabled = false; signingConfig = signingConfigs.getByName("release"); proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro") } }
 }
 
 dependencies {
